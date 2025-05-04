@@ -3,14 +3,14 @@
 #include <src/ui/i-command.hpp>
 #include <src/domain-logic/vehicle-manager.hpp>
 
-class SearchVehicleByNumberCommand : public ICommand
+class GetOwnerByLicensePlateCommand : public ICommand
 {
 private:
     VehicleManager& m_manager;
 
 public:
-    SearchVehicleByNumberCommand(VehicleManager& manager);
-    ~SearchVehicleByNumberCommand() = default;
+    GetOwnerByLicensePlateCommand(VehicleManager& manager);
+    ~GetOwnerByLicensePlateCommand() = default;
 public:
     void execute() override;
 
