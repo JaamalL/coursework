@@ -5,10 +5,9 @@
 #include <ctime>
 
 #include <src/entities/owner.hpp>
-#include <src/entities/accident.hpp>
-#include <src/entities/theft-case.hpp>
+#include <src/entities/entity.hpp>
 
-class Vehicle
+class Vehicle : Entity<Vehicle>
 {
 public:
     enum VehicleType
@@ -26,12 +25,12 @@ private:
     std::string m_chassisSerialNumber;
     std::string m_bodySerialNumber;
     std::string m_color;
-    Owner* m_owner;
+    unsigned int m_ownerId;
 
 public:
     Vehicle(const std::string licensePlate, const VehicleType type, const std::string brand, 
         const unsigned int releaseYear, const float engineVolume, const std::string engineSerialNumber, 
-        const std::string chassisSerialNamber, const std::string bodySerialNumber, const std::string color, Owner& owner);
+        const std::string chassisSerialNamber, const std::string bodySerialNumber, const std::string color, const unsigned int ownerId);
     ~Vehicle() = default;
 public:
     std::string  getLicensePlate() const;
@@ -43,10 +42,10 @@ public:
     std::string  getChassisSerialNamber() const;
     std::string  getBodySerialNumber() const;
     std::string  getColor() const;
-    Owner&       getOwner() const;
+    unsigned int getOwnerId() const;
     
-    void  setLicensePlate(const std::string licensePlate);
-    void  setColor(const std::string color);
-    void  setOwner(Owner& owner);
+    void setLicensePlate(const std::string licensePlate);
+    void setColor(const std::string color);
+    void setOwner(const unsigned int ownerId);
     
 };
