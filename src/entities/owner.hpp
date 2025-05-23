@@ -18,7 +18,6 @@ private:
 public:
     Owner(const std::string phoneNumber, const std::string surname, const std::string name, 
         const std::string patronymic, const std::string address, std::vector<unsigned int>& vehicleIds);
-    ~Owner() = default;
 public:
     std::string                getPhoneNumber() const;
     std::string                getSurname() const;

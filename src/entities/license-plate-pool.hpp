@@ -19,7 +19,6 @@ private:
 
 public:
     LicensePlatePool(const std::string series, const Range baseRange);
-    ~LicensePlatePool() = default;
 public:
     std::string         getSeries() const;
     Range               getBaseRange() const;

@@ -16,7 +16,6 @@ private:
 
 public:
     TheftCase(const time_t dateTime, const std::string location, const std::string hackingMethod, const unsigned int vehicleId);
-    ~TheftCase() = default;
 public:
     time_t       getDateTime() const;
     std::string  getLocation() const;

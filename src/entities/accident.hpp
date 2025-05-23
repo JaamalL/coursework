@@ -5,6 +5,7 @@
 
 #include <src/entities/vehicle.hpp>
 #include <src/entities/entity.hpp>
+#include <src/helpers/date-time.hpp>
 
 class Accident : public Entity<Accident>
 {
@@ -20,13 +21,13 @@ public:
     };
 
 private:
-    time_t m_dateTime; // TODO change to DateTime helper
+    DateTime m_dateTime; // TODO change to DateTime helper
     AccidentType m_accidentType;
     std::string m_location;
     std::vector<unsigned int> m_participantVehicleIds;
     std::string m_description;
     unsigned int m_injuredCount;
-    double m_damageCost;
+    float m_damageCost;
     std::string m_cause;
     std::string m_roadConditions;
     std::vector<unsigned int> m_escapedVehicleIds;

@@ -17,7 +17,6 @@ private:
 public:
     Organization(const std::string organizationName, const std::string area, const std::string address, 
         const std::string managerFullName, std::vector<unsigned int>& vehicleIds);
-    ~Organization() = default;
 public:
     std::string                getOrganizationName() const;
     std::string                getArea() const;

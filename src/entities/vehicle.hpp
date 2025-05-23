@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <vector>
 #include <ctime>
 
 #include <src/entities/owner.hpp>
@@ -31,7 +30,6 @@ public:
     Vehicle(const std::string licensePlate, const VehicleType type, const std::string brand, 
         const unsigned int releaseYear, const float engineVolume, const std::string engineSerialNumber, 
         const std::string chassisSerialNamber, const std::string bodySerialNumber, const std::string color, const unsigned int ownerId);
-    ~Vehicle() = default;
 public:
     std::string  getLicensePlate() const;
     VehicleType  getType() const;
