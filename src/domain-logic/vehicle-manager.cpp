@@ -48,3 +48,13 @@ std::unique_ptr<VehicleDTO> VehicleManager::getVehicleByLicensePlate(
         veh->getIsAccident() 
     });
 }
+std::vector<std::string> VehicleManager::getVehicleLicensePlates() const
+{
+    std::vector<std::string> out;
+    const std::vector<Vehicle*>& vehicles = m_vehicleRepo.getAll();
+
+    for (unsigned int i = 0; i < vehicles.size(); ++i)
+        out.push_back(vehicles[i]->getLicensePlate());
+
+    return out;
+}

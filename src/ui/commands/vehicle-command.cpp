@@ -24,7 +24,7 @@ void VehicleCommand::execute()
                 Validator::LICENSE_PLATE_TEMPLATE + "> ", licensePlate);
 
             unsigned int type = 0;
-            Input::inputNumber("Vehicle type:\n0 - CAR_PASSENGER\n 1 - CAR_TRUCK\n 2 - TRAILER\n 3 - SEMI_TRAILER\n4 - MOTO\n5 - TRACTOR\n6 - BUS\n7 - BUS_MINI\n> ", type);
+            Input::inputNumber("Vehicle type:\n0 - CAR_PASSENGER\n1 - CAR_TRUCK\n2 - TRAILER\n3 - SEMI_TRAILER\n4 - MOTO\n5 - TRACTOR\n6 - BUS\n7 - BUS_MINI\n> ", type);
 
             if (!Vehicle::isValidVehicleType(type))
                 throw std::runtime_error("Error: invalid option");
@@ -81,6 +81,20 @@ void VehicleCommand::execute()
             std::unique_ptr<VehicleDTO> vehicle = m_vehicleManager.getVehicleByLicensePlate(licensePlate);
 
             Printer::printVehicle(*vehicle);
+        }
+    );
+
+    optionMenu.addOption("get all licnese plates", 
+        [&]()
+        {
+            std::vector<std::string> licensePlates = m_vehicleManager.getVehicleLicensePlates();
+
+            std::cout << "==========================================\n";
+            std::cout << "License plate count: " << licensePlates.size() << std::endl;
+            
+            for (unsigned int i = 0; i < licensePlates.size(); ++i)
+                std::cout << (i + 1) << ": " << licensePlates[i] << std::endl;
+            std::cout << "==========================================\n";
         }
     );
 

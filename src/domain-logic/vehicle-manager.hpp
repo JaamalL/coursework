@@ -23,5 +23,6 @@ public:
         const bool isPassedInspection, const bool isAccident, const std::string ownerPhoneNumber);
 
     std::unique_ptr<VehicleDTO> getVehicleByLicensePlate(const std::string licensePlate) const;
+    std::vector<std::string> getVehicleLicensePlates() const;
 
 };
