@@ -5,7 +5,7 @@
 #include <vector>
 #include <fstream>
 
-#define FILE_SEPARATOR '\x1F'
+#define FILE_SEPARATOR '|' // '\x1F'
 
 template <typename T>
 class FileRepoBase

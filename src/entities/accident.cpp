@@ -47,6 +47,7 @@ const std::vector<unsigned int>& Accident::getEscapedVehicleIds() const { return
 
 std::string Accident::causeTypeToString(const CauseType type) { return m_causeTypeStr[(unsigned int)type]; }
 bool Accident::isValidCauseType(const unsigned int type) { return type <= (unsigned int)CauseType::OTHER; }
+bool Accident::isValidAccidentType(const unsigned int type) { return type <= (unsigned int)AccidentType::OTHER; }
 
 std::string Accident::m_causeTypeStr[] = { 
     "DRUNK", 

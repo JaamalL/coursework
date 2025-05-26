@@ -23,7 +23,7 @@ public:
     std::vector<VehicleDTO> getTheftVehicles() const;
     float getSearchEfficiency() const;
     std::vector<TheftCaseDTO> getByPeriod(const DateTime start, const DateTime end) const;
-    std::unique_ptr<TheftCaseAnalysisDTO> getAnalysis() const;
+    std::unique_ptr<TheftCaseStatisticDTO> getStatistic() const;
     
     void setFound(const std::string licensePlate);
 

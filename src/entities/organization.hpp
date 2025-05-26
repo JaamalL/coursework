@@ -9,8 +9,8 @@
 struct OrganizationDTO
 {
     std::string organizationName;
-    std::string m_address;
-    std::string m_managerFullName;
+    std::string address;
+    std::string managerFullName;
 };
 
 class Organization : public Entity<Organization>

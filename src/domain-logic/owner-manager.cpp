@@ -34,7 +34,7 @@ std::unique_ptr<OwnerDTO> OwnerManager::getOwnerByLicensePlate(const std::string
         owner->getAddress()
     });
 }
-std::vector<OwnerDTO> OwnerManager::getOwnerByNotPassedInspection() const
+std::vector<OwnerDTO> OwnerManager::getOwnersByNotPassedInspection() const
 {
     std::vector<OwnerDTO> out;
     const std::vector<Vehicle*>& vehicles = m_vehicleRepo.getAll();

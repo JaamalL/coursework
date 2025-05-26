@@ -14,7 +14,7 @@ namespace StringUtil
             return "";
 
         std::string out;
-        for (unsigned int i = 1; i < size; ++i)
+        for (unsigned int i = 0; i < size; ++i)
             out += arr[i] + sep;
 
         return out;

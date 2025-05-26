@@ -87,9 +87,9 @@ std::vector<TheftCaseDTO> TheftCaseManager::getByPeriod(const DateTime start, co
 
     return out;
 }
-std::unique_ptr<TheftCaseAnalysisDTO> TheftCaseManager::getAnalysis() const
+std::unique_ptr<TheftCaseStatisticDTO> TheftCaseManager::getStatistic() const
 {
-    std::unique_ptr<TheftCaseAnalysisDTO> out = std::make_unique<TheftCaseAnalysisDTO>();
+    std::unique_ptr<TheftCaseStatisticDTO> out = std::make_unique<TheftCaseStatisticDTO>();
     const std::vector<TheftCase*>& theftCases = m_theftCaseRepo.getAll();
     std::unordered_map<std::string, unsigned int> brandStatMap;
     std::unordered_map<Vehicle::VehicleType, unsigned int> vehicleTypeStatMap;

@@ -11,10 +11,10 @@ namespace Validator
 
     std::string getLicensePlateSeries(const std::string& licensePlate);
 
-    const std::string SERIAL_NUMBER = "XXX-XXX-XXX";
+    const std::string SERIAL_NUMBER_TEMPLATE = "XXX-XXX-XXX";
     bool isValidSerialNumber(const std::string& serialNumber);
 
-    const std::string PHONE_NUMBER = "XXX-XXX-XX-XX";
+    const std::string PHONE_NUMBER_TEMPLATE = "XXX-XXX-XX-XX";
     bool isValidPhoneNumber(const std::string phoneNumber);
 
 };

@@ -18,6 +18,6 @@ public:
         const std::string patronymic, const std::string address);
 
     std::unique_ptr<OwnerDTO> getOwnerByLicensePlate(const std::string licensePlate) const;
-    std::vector<OwnerDTO> getOwnerByNotPassedInspection() const;
+    std::vector<OwnerDTO> getOwnersByNotPassedInspection() const;
     
 };

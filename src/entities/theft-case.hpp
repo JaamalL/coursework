@@ -15,7 +15,7 @@ struct TheftCaseDTO
     std::string licensePlate;
     bool isFound;
 };
-struct TheftCaseAnalysisDTO
+struct TheftCaseStatisticDTO
 {
     std::vector<std::string> mostPopularBrands;
     std::vector<std::string> mostPopularVehicleTypes;

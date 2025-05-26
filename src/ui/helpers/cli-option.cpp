@@ -21,7 +21,7 @@ void CLIOption::start()
     {
         try
         {
-            Input::inputNumber("Option> ", opt);
+            Input::inputNumber("> ", opt);
         } 
         catch (std::exception& ex) 
         {
@@ -30,11 +30,9 @@ void CLIOption::start()
         }
 
         if (opt < m_options.size())
-        {
-            std::cout << "Error: invalid option\n";
-            continue;
-        }
-        break;
+            break;
+        
+        std::cout << "Error: invalid option\n";
     }
 
     try 

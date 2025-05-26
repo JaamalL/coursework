@@ -10,11 +10,11 @@ private:
 protected:
     Entity()
     :
-    m_id(m_counter++)
+        m_id(m_counter++)
     {}
     Entity(const unsigned int id)
     :
-    m_id(id)
+        m_id(id)
     {
         if (m_counter <= id)
             m_counter = id + 1;

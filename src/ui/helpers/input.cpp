@@ -1,10 +1,10 @@
-#include "src/helpers/date-time.hpp"
 #include <exception>
 #include <iostream>
 #include <stdexcept>
 #include <string>
 
 #include <src/ui/helpers/input.hpp>
+#include <src/domain-logic/validator.hpp>
 
 void checkExit(const std::string& inp)
 {
@@ -76,7 +76,31 @@ void Input::inputNumber(const std::string question, float& out)
         }
     }
 }
-void inputDateTime(const std::string question, DateTime& out)
+void Input::inputLogic(const std::string question, bool& out)
+{
+    std::string inp;
+    for (;;)
+    {
+        std::cout << question;
+        std::getline(std::cin, inp);
+
+        checkExit(inp);
+
+        if (inp == "yes")
+        {
+            out = true;
+            return;
+        }
+        if (inp == "no")
+        {
+            out = false;
+            return;
+        }
+
+        std::cout << "Error: invalid logic option, should be yes/no\n";
+    }
+}
+void Input::inputDateTime(const std::string question, DateTime& out)
 {
     std::string inp;
     for (;;)
@@ -90,7 +114,7 @@ void inputDateTime(const std::string question, DateTime& out)
         {
             out = DateTime(inp);
         } 
-        catch (std::invalid_argument& ex) 
+        catch (std::exception& ex) 
         {
             std::cout << ex.what() << std::endl;
             continue;
@@ -99,7 +123,7 @@ void inputDateTime(const std::string question, DateTime& out)
         break;
     }
 }
-void inputPeriod(const std::string question, DateTime& start, DateTime& end)
+void Input::inputPeriod(const std::string question, DateTime& start, DateTime& end)
 {
     for (;;)
     {
@@ -112,7 +136,48 @@ void inputPeriod(const std::string question, DateTime& start, DateTime& end)
         std::cout << "Error: invalid period\n";
     }
 }
-void inputLicensePlate(const std::string question, std::string& out)
+void Input::inputLicensePlate(const std::string question, std::string& out)
 {
+    for (;;)
+    {
+        std::cout << question;
+        std::getline(std::cin, out);
 
+        checkExit(out);
+
+        if (Validator::isValidLicensePlate(out))
+            return;
+
+        std::cout << "Error: invalid license plate\n";
+    }
+}
+void Input::inputPhoneNumber(const std::string question, std::string& out)
+{
+    for (;;)
+    {
+        std::cout << question;
+        std::getline(std::cin, out);
+
+        checkExit(out);
+
+        if (Validator::isValidPhoneNumber(out))
+            return;
+
+        std::cout << "Error: invalid phone number\n";
+    }
+}
+void Input::inputSerialNumber(const std::string question, std::string& out)
+{
+    for (;;)
+    {
+        std::cout << question;
+        std::getline(std::cin, out);
+
+        checkExit(out);
+
+        if (Validator::isValidSerialNumber(out))
+            return;
+
+        std::cout << "Error: invalid serial number\n";
+    }
 }

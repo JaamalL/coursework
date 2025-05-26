@@ -5,7 +5,7 @@
 class ExitCommand : public ICommand
 {
 public:
-    ExitCommand();
+    ExitCommand() = default;
 public:
     void execute() override;
 

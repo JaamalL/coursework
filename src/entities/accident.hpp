@@ -85,5 +85,6 @@ public:
 
     static std::string causeTypeToString(const CauseType type);
     static bool isValidCauseType(const unsigned int type);
+    static bool isValidAccidentType(const unsigned int type);
 
 };
