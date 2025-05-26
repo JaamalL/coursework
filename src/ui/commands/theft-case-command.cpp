@@ -15,6 +15,28 @@ void TheftCaseCommand::execute()
 {
     CLIOption optionMenu;
 
+    optionMenu.addOption("create", 
+        [&]()
+        {
+            DateTime dateTime;
+            Input::inputDateTime("Time DD-MM-YYYY hh:mm:ss> ", dateTime);
+
+            std::string location;
+            std::cout << "Location> ";
+            std::getline(std::cin, location);
+
+            std::string hackingMethod;
+            std::cout << "Hacking method> ";
+            std::getline(std::cin, hackingMethod);
+
+            std::string licensePlate;
+            Input::inputLicensePlate("License plate " + 
+                Validator::LICENSE_PLATE_TEMPLATE + "> ", licensePlate);
+
+            m_theftCaseManager.createTheftCase(dateTime, location, hackingMethod, licensePlate);
+        }
+    );
+
     optionMenu.addOption("get search efficiency", 
         [&]()
         {

@@ -16,7 +16,7 @@ void AccidentCommand::execute()
 {
     CLIOption optionMenu;
 
-    optionMenu.addOption("add", 
+    optionMenu.addOption("create", 
         [&]()
         {
             DateTime dateTime;

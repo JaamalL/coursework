@@ -14,7 +14,7 @@ void OwnerCommand::execute()
 {
     CLIOption optionMenu;
 
-    optionMenu.addOption("add", 
+    optionMenu.addOption("create", 
         [&]()
         {
             std::string phoneNumber;

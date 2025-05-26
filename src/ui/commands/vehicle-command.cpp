@@ -16,7 +16,7 @@ void VehicleCommand::execute()
 {
     CLIOption optionMenu;
 
-    optionMenu.addOption("add", 
+    optionMenu.addOption("create", 
         [&]()
         {
             std::string licensePlate;
