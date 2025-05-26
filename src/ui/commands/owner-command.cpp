@@ -61,7 +61,7 @@ void OwnerCommand::execute()
             std::vector<OwnerDTO> owners = m_ownerManager.getOwnersByNotPassedInspection();
 
             std::cout << "==========================================\n";
-            std::cout << "Total owners: " << owners.size();
+            std::cout << "Total owners: " << owners.size() << std::endl;
 
             for (unsigned int i = 0; i < owners.size(); ++i)
                 printOwner(owners[i]);

@@ -81,6 +81,7 @@ void VehicleCommand::execute()
             std::unique_ptr<VehicleDTO> vehicle = m_vehicleManager.getVehicleByLicensePlate(licensePlate);
 
             Printer::printVehicle(*vehicle);
+            std::cout << "==========================================\n";
         }
     );
 
@@ -91,6 +92,7 @@ void VehicleCommand::execute()
 
             std::cout << "==========================================\n";
             std::cout << "License plate count: " << licensePlates.size() << std::endl;
+            std::cout << "==========================================\n";
             
             for (unsigned int i = 0; i < licensePlates.size(); ++i)
                 std::cout << (i + 1) << ": " << licensePlates[i] << std::endl;
