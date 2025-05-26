@@ -6,12 +6,34 @@
 #include <src/entities/owner.hpp>
 #include <src/entities/entity.hpp>
 
-class Vehicle : Entity<Vehicle>
+struct VehicleDTO
+{
+    std::string licensePlate;
+    std::string type;
+    std::string brand;
+    unsigned int releaseYear;
+    float engineVolume;
+    std::string engineSerialNumber;
+    std::string chassisSerialNumber;
+    std::string bodySerialNumber;
+    std::string color;
+    bool isPassedInspection;
+    bool isAccident;
+};
+
+class Vehicle : public Entity<Vehicle>
 {
 public:
-    enum VehicleType
+    enum class VehicleType 
     {
-
+        CAR_PASSENGER, 
+        CAR_TRUCK,
+        TRAILER,
+        SEMI_TRAILER,
+        MOTO,
+        TRACTOR,
+        BUS,
+        BUS_MINI
     };
 
 private:
@@ -24,12 +46,21 @@ private:
     std::string m_chassisSerialNumber;
     std::string m_bodySerialNumber;
     std::string m_color;
+    bool m_isPassedInspection;
+    bool m_isAccident;
     unsigned int m_ownerId;
+
+    static std::string m_vehicleTypeStr[];
 
 public:
     Vehicle(const std::string licensePlate, const VehicleType type, const std::string brand, 
         const unsigned int releaseYear, const float engineVolume, const std::string engineSerialNumber, 
-        const std::string chassisSerialNamber, const std::string bodySerialNumber, const std::string color, const unsigned int ownerId);
+        const std::string chassisSerialNumber, const std::string bodySerialNumber, const std::string color, 
+        const bool isPassedInspection, const bool isAccident, const unsigned int ownerId);
+    Vehicle(const unsigned int id, const std::string licensePlate, const VehicleType type, const std::string brand, 
+        const unsigned int releaseYear, const float engineVolume, const std::string engineSerialNumber, 
+        const std::string chassisSerialNamber, const std::string bodySerialNumber, const std::string color, 
+        const bool isPassedInspection, const bool isAccident, const unsigned int ownerId);
 public:
     std::string  getLicensePlate() const;
     VehicleType  getType() const;
@@ -37,13 +68,16 @@ public:
     unsigned int getReleaseYear() const;
     float        getEngineVolume() const;
     std::string  getEngineSerialNumber() const;
-    std::string  getChassisSerialNamber() const;
+    std::string  getChassisSerialNumber() const;
     std::string  getBodySerialNumber() const;
     std::string  getColor() const;
+    bool         getIsPassedInspection() const;
+    bool         getIsAccident() const;
     unsigned int getOwnerId() const;
-    
-    void setLicensePlate(const std::string licensePlate);
-    void setColor(const std::string color);
-    void setOwner(const unsigned int ownerId);
+
+    void setIsAccident(const bool isAccident);
+
+    static std::string vehicleTypeToString(VehicleType type);
+    static bool isValidVehicleType(const unsigned int type);
     
 };

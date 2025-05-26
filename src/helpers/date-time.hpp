@@ -3,6 +3,7 @@
 #include <ctime>
 #include <string>
 
+// DD-MM-YYYY hh:mm:ss
 class DateTime
 {
 private:
@@ -12,11 +13,12 @@ private:
 public:
     DateTime();
     DateTime(const std::string dateTime);
-    ~DateTime() = default;
 public:
-    bool operator<(const DateTime& obj);
-    bool operator>(const DateTime& obj);
-    bool operator>=(const DateTime& obj);
-    bool operator<=(const DateTime& obj);
+    bool operator<(const DateTime& obj) const;
+    bool operator>(const DateTime& obj) const;
+    bool operator>=(const DateTime& obj) const;
+    bool operator<=(const DateTime& obj) const;
+public:
+    std::string toSring() const;
 
 };

@@ -7,7 +7,7 @@ private:
     unsigned int m_id;
     static unsigned int m_counter;
 
-public:
+protected:
     Entity()
     :
     m_id(m_counter++)
@@ -19,6 +19,8 @@ public:
         if (m_counter <= id)
             m_counter = id + 1;
     }
+
+public:
     virtual ~Entity() = default;
 public:
     unsigned int getId() const { return m_id; }
