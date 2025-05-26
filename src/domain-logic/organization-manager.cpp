@@ -1,13 +1,16 @@
+#include "src/data/i-vehicle-record-repo.hpp"
+#include "src/entities/vehicle-record.hpp"
 #include <stdexcept>
 
 #include <src/domain-logic/organization-manager.hpp>
 #include <src/domain-logic/validator.hpp>
 
 OrganizationManager::OrganizationManager(IOrganizationRepo& organizationRepo, 
-    IVehicleRepo& vehicleRepo)\
+    IVehicleRepo& vehicleRepo, IVehicleRecordRepo& vehicleRecordRepo)
 :
     m_organizationRepo(organizationRepo),
-    m_vehicleRepo(vehicleRepo)
+    m_vehicleRepo(vehicleRepo),
+    m_vehicleRecordRepo(vehicleRecordRepo)
 {}
 
 void OrganizationManager::createOrganization(const std::string organizationName, 
@@ -17,18 +20,22 @@ void OrganizationManager::createOrganization(const std::string organizationName,
     if (m_organizationRepo.getByName(organizationName) != nullptr)
         throw std::runtime_error("Error: organization name exists");
 
-    std::vector<Organization::VehicleRecord> vehicleRec;
+    std::vector<unsigned int> vehicleRecordIds;
     for (unsigned int i = 0; i < vehicleRecords.size(); ++i)
     {
         Vehicle* veh = m_vehicleRepo.getByLicensePlate(vehicleRecords[i].licensePlate);
         if (veh == nullptr)
             throw std::runtime_error("Error: vehicle not exists");
 
-        vehicleRec.push_back({ vehicleRecords[i].dateTime, veh->getId() });
+        VehicleRecord* vehRec = new VehicleRecord(vehicleRecords[i].dateTime, 
+            veh->getId());
+        
+        m_vehicleRecordRepo.add(vehRec);
+        vehicleRecordIds.push_back(vehRec->getId());
     }
 
     m_organizationRepo.add(new Organization(organizationName, address, managerFullName, 
-        vehicleRec));
+        vehicleRecordIds));
 }
 
 std::vector<OrganizationDTO> OrganizationManager::getBySeries(const std::string series) const
@@ -37,14 +44,18 @@ std::vector<OrganizationDTO> OrganizationManager::getBySeries(const std::string 
     const std::vector<Organization*>& organizations = m_organizationRepo.getAll();
     for (unsigned int i = 0; i < organizations.size(); ++i)
     {
-        const std::vector<Organization::VehicleRecord>& rec = organizations[i]->getVehicleRecords();
+        const std::vector<unsigned int>& rec = organizations[i]->getVehicleRecordIds();
         for (unsigned int j = 0; j < rec.size(); ++j)
         {
-            Vehicle* veh = m_vehicleRepo.getById(rec[i].vehicleId);
-            if (Validator::getLicensePlateSeries(veh->getLicensePlate()) == series)
-                out.push_back({ organizations[i]->getOrganizationName(), 
-                    organizations[i]->getAddress(), 
-                    organizations[i]->getManagerFullName() });
+            Vehicle* veh = m_vehicleRepo.getById(m_vehicleRecordRepo.getById(rec[i])->getVehicleId());
+            if (Validator::getLicensePlateSeries(veh->getLicensePlate()) != series)
+                continue;
+            
+            out.push_back({ 
+                organizations[i]->getOrganizationName(), 
+                organizations[i]->getAddress(), 
+                organizations[i]->getManagerFullName() 
+            });
         }
     }
 
@@ -57,13 +68,19 @@ std::vector<OrganizationDTO> OrganizationManager::getByRecievedPeriod(const Date
     const std::vector<Organization*>& organizations = m_organizationRepo.getAll();
     for (unsigned int i = 0; i < organizations.size(); ++i)
     {
-        const std::vector<Organization::VehicleRecord>& rec = organizations[i]->getVehicleRecords();
+        const std::vector<unsigned int>& rec = organizations[i]->getVehicleRecordIds();
         for (unsigned int j = 0; j < rec.size(); ++j)
         {
-            if (rec[j].dateTime >= start && rec[j].dateTime <= end)
-                out.push_back({ organizations[i]->getOrganizationName(), 
-                    organizations[i]->getAddress(), 
-                    organizations[i]->getManagerFullName() });
+            VehicleRecord* vehRec = m_vehicleRecordRepo.getById(rec[i]);
+
+            if (vehRec->getDateTime() >= start && vehRec->getDateTime() <= end)
+                continue;
+            
+            out.push_back({ 
+                organizations[i]->getOrganizationName(), 
+                organizations[i]->getAddress(), 
+                organizations[i]->getManagerFullName()
+            });
         }
     }
 

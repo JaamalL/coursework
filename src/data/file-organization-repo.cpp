@@ -14,33 +14,21 @@ FileOrganizationRepo::~FileOrganizationRepo()
 
 std::string FileOrganizationRepo::entityToString(Organization* ent)
 {
-    std::string vehicleRecordsStr;
-    const std::vector<Organization::VehicleRecord>& vehicleRecords = ent->getVehicleRecords();
-    for (unsigned int i = 0; i < vehicleRecords.size(); ++i)
-        vehicleRecordsStr += vehicleRecords[i].dateTime.toSring() + ' ' + 
-            std::to_string(vehicleRecords[i].vehicleId) + ' ';
-
     return StringUtil::join({
         std::to_string(ent->getId()),
         ent->getOrganizationName(),
         ent->getAddress(),
         ent->getManagerFullName(),
-        vehicleRecordsStr
+        StringUtil::join(ent->getVehicleRecordIds())
     }, FILE_SEPARATOR);
 }
 Organization* FileOrganizationRepo::stringToEntity(const std::string record)
 {
     std::vector<std::string> entFields = StringUtil::splitString(record, FILE_SEPARATOR);
-    std::vector<Organization::VehicleRecord> vehicleRecords;
-    std::vector<std::string> vehicleRecordStrs = StringUtil::splitString(entFields[4]);
-
-    for (unsigned int i = 0; i < vehicleRecordStrs.size() / 2; ++i)
-        vehicleRecords.push_back({ vehicleRecordStrs[i], 
-            (unsigned int)std::stoul(vehicleRecordStrs[i + 1]) });
-
+    std::vector<unsigned int> vehicleRecordIds = StringUtil::splitNumber(entFields[4]);
     
     return new Organization(std::stoul(entFields[0]), entFields[1], 
-        entFields[2], entFields[3], vehicleRecords);
+        entFields[2], entFields[3], vehicleRecordIds);
 }
 
 Organization* FileOrganizationRepo::getById(const unsigned int id)
