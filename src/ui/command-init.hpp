@@ -14,11 +14,6 @@
 class CommandInit
 {
 private:
-    AccidentManager& m_accidentManager;
-    OrganizationManager& m_organizationManager;
-    OwnerManager& m_ownerManager;
-    TheftCaseManager& m_theftCaseManager;
-    VehicleManager& m_vehicleManager;
     std::unordered_map<std::string, ICommand*> m_commands;
 
 public:

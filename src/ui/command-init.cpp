@@ -10,18 +10,12 @@
 CommandInit::CommandInit(AccidentManager& accidentManager, OrganizationManager& organizationManager, 
     OwnerManager& ownerManager, TheftCaseManager& theftCaseManager, 
     VehicleManager& vehicleManager)
-:
-    m_accidentManager(accidentManager),
-    m_organizationManager(organizationManager),
-    m_ownerManager(ownerManager),
-    m_theftCaseManager(theftCaseManager),
-    m_vehicleManager(vehicleManager)
 {
-    m_commands["accident"] = new AccidentCommand(m_accidentManager);
-    m_commands["organization"] = new OrganizationCommand(m_organizationManager);
-    m_commands["owner"] = new OwnerCommand(m_ownerManager);
-    m_commands["theft-case"] = new TheftCaseCommand(m_theftCaseManager);
-    m_commands["vehicle"] = new VehicleCommand(m_vehicleManager);
+    m_commands["accident"] = new AccidentCommand(accidentManager);
+    m_commands["organization"] = new OrganizationCommand(organizationManager);
+    m_commands["owner"] = new OwnerCommand(ownerManager);
+    m_commands["theft-case"] = new TheftCaseCommand(theftCaseManager);
+    m_commands["vehicle"] = new VehicleCommand(vehicleManager);
     m_commands["help"] = new HelpCommand(getCommandNames());
     m_commands["exit"] = new ExitCommand();
 }
