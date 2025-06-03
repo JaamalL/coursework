@@ -44,11 +44,12 @@ std::vector<OrganizationDTO> OrganizationManager::getBySeries(const std::string 
     const std::vector<Organization*>& organizations = m_organizationRepo.getAll();
     for (unsigned int i = 0; i < organizations.size(); ++i)
     {
-        const std::vector<unsigned int>& rec = organizations[i]->getVehicleRecordIds();
-        for (unsigned int j = 0; j < rec.size(); ++j)
+        const std::vector<unsigned int>& recs = organizations[i]->getVehicleRecordIds();
+        for (unsigned int j = 0; j < recs.size(); ++j)
         {
-            Vehicle* veh = m_vehicleRepo.getById(m_vehicleRecordRepo.getById(rec[i])->getVehicleId());
-            if (Validator::getLicensePlateSeries(veh->getLicensePlate()) != series)
+            VehicleRecord* vehRec = m_vehicleRecordRepo.getById(recs[j]);
+            if (Validator::getLicensePlateSeries(
+                m_vehicleRepo.getById(vehRec->getVehicleId())->getLicensePlate()) != series)
                 continue;
             
             out.push_back({ 
@@ -56,6 +57,7 @@ std::vector<OrganizationDTO> OrganizationManager::getBySeries(const std::string 
                 organizations[i]->getAddress(), 
                 organizations[i]->getManagerFullName() 
             });
+            break;
         }
     }
 
@@ -73,7 +75,7 @@ std::vector<OrganizationDTO> OrganizationManager::getByRecievedPeriod(const Date
         {
             VehicleRecord* vehRec = m_vehicleRecordRepo.getById(rec[i]);
 
-            if (vehRec->getDateTime() >= start && vehRec->getDateTime() <= end)
+            if (vehRec->getDateTime() < start || vehRec->getDateTime() > end)
                 continue;
             
             out.push_back({ 
@@ -81,6 +83,7 @@ std::vector<OrganizationDTO> OrganizationManager::getByRecievedPeriod(const Date
                 organizations[i]->getAddress(), 
                 organizations[i]->getManagerFullName()
             });
+            break;
         }
     }
 

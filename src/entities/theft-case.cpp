@@ -9,13 +9,14 @@ TheftCase::TheftCase(const DateTime dateTime, const std::string location, const 
     m_vehicleId(vehicleId)
 {}
 TheftCase::TheftCase(const unsigned int id, const DateTime dateTime, const std::string location, 
-    const std::string hackingMethod, const unsigned int vehicleId)
+    const std::string hackingMethod, const unsigned int vehicleId, const bool isFound)
 :
     Entity(id),
     m_dateTime(dateTime),
     m_location(location),
     m_hackingMethod(hackingMethod),
-    m_vehicleId(vehicleId)
+    m_vehicleId(vehicleId),
+    m_isFound(isFound)
 {}
 
 DateTime     TheftCase::getDateTime() const { return m_dateTime; }

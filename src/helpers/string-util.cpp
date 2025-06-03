@@ -4,12 +4,9 @@
 
 std::string StringUtil::join(const std::vector<unsigned int>& arr, const char sep)
 {
-    if (arr.size() == 0)
-        return "";
-
     std::string out;
-    
-    for (unsigned int i = 1; i < arr.size(); ++i)
+
+    for (unsigned int i = 0; i < arr.size(); ++i)
         out += std::to_string(arr[i]) + sep;
 
     return out;

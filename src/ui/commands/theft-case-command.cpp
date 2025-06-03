@@ -53,7 +53,7 @@ void TheftCaseCommand::execute()
         {
             DateTime start;
             DateTime end;
-            Input::inputPeriod("> ", start, end);
+            Input::inputPeriod(" DD-MM-YYYY hh:mm:ss> ", start, end);
 
             std::vector<TheftCaseDTO> theftCases = m_theftCaseManager.getByPeriod(start, end);
 
@@ -81,18 +81,19 @@ void TheftCaseCommand::execute()
             std::cout << "==========================================\n";
             std::cout << "Total brands: " << stat->mostPopularBrands.size() << std::endl;
             std::cout << "Total vehicle types: " << stat->mostPopularVehicleTypes.size() << std::endl;
+            std::cout << "==========================================\n";
 
             for (unsigned int i = 0; i < stat->mostPopularBrands.size(); ++i)
-            {
-                std::cout << "==========================================\n";
                 std::cout << "Top" << (i + 1) << " brand: " << stat->mostPopularBrands[i] << std::endl;
-            }
-            for (unsigned int i = 0; i < stat->mostPopularVehicleTypes.size(); ++i)
-            {
+
+            if (stat->mostPopularBrands.size() > 0)
                 std::cout << "==========================================\n";
+
+            for (unsigned int i = 0; i < stat->mostPopularVehicleTypes.size(); ++i)
                 std::cout << "Top" << (i + 1) << " vehicle type: " << stat->mostPopularVehicleTypes[i] << std::endl;
-            }
-            std::cout << "==========================================\n";
+    
+            if (stat->mostPopularVehicleTypes.size() > 0)
+                std::cout << "==========================================\n";
         }
     );
 

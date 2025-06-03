@@ -34,7 +34,7 @@ public:
     TheftCase(const DateTime dateTime, const std::string location, const std::string hackingMethod, 
         const unsigned int vehicleId);
     TheftCase(const unsigned int id, const DateTime dateTime, const std::string location, 
-        const std::string hackingMethod, const unsigned int vehicleId);
+        const std::string hackingMethod, const unsigned int vehicleId, const bool isFound);
 public:
     DateTime     getDateTime() const;
     std::string  getLocation() const;

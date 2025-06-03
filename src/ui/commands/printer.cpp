@@ -20,7 +20,7 @@ void Printer::printVehicle(const VehicleDTO& vehicle)
 void Printer::printVehicles(const std::vector<VehicleDTO>& vehicles)
 {
     std::cout << "==========================================\n";
-    std::cout << "Total vehicles: " << vehicles.size();
+    std::cout << "Total vehicles: " << vehicles.size() << std::endl;
 
     for (unsigned int i = 0 ; i < vehicles.size(); ++i)
         printVehicle(vehicles[i]);
