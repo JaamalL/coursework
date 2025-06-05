@@ -12,8 +12,6 @@ private:
     IVehicleRepo& m_vehicleRepo;
     IOwnerRepo& m_ownerRepo;
 
-    static std::string vehicleTypeToString(const Vehicle::VehicleType type);
-
 public:
     VehicleManager(IVehicleRepo& vehicleRepo, IOwnerRepo& ownerRepo);
 public:
