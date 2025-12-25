@@ -3,3 +3,6 @@ build/
 
 # Ignore VScode settings
 .vscode/
+
+# Ignore LLVM settings
+.cache/

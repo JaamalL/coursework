@@ -1,12 +1,9 @@
-#include <iostream>
+#include <src/ui/cli-app.hpp>
 
-/**
- * @brief Program entrypoint
- * @return Execute status(0 - success status)
- */
 int main()
 {
-    std::cout << "Hello world!\n";
+    CLIApp application;
+    application.run();
 
     return 0;
 }
